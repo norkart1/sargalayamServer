@@ -1,6 +1,7 @@
-const Teams = require("../Model/teams");
+
 const path = require("path");
-const fs= require('fs')
+const fs= require('fs');
+const Teams = require("../Model/teams");
 
 // Function to add a new team
 const addTeam = async (teamData, teamImg,io) => {
@@ -29,9 +30,11 @@ const addTeam = async (teamData, teamImg,io) => {
 
 const getAllTeams = async () => {
   try {
+    console.log('working')
     // Fetch all Teams from the database
-    const Teams = await Teams.find();
-    return Teams;
+    const allTeams = await Teams.find();
+
+    return allTeams;
   } catch (error) {
     throw error;
   }

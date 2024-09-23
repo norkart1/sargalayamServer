@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const adminRoute = require("./routes/admin");
-const brokerRoute = require("./routes/teams");
+const teamRoute = require("./routes/teams");
 const bodyParser = require("body-parser");
 const path = require("node:path");
 const { Server } = require("socket.io");
@@ -47,7 +47,7 @@ app.use(express.json()); // for parsing application/json
 
 //ROUTE use
 app.use("/admin", adminRoute);
-app.use("/brokers", brokerRoute);
+app.use("/teams", teamRoute);
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "public")));
@@ -62,7 +62,7 @@ const PORT = process.env.PORT || 5000;
 
 mongoose
   .connect(process.env.MONGO_URL, {
-    dbName: "FX-REVIEW",
+    dbName: "COLLEGE-FEST2024",
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
