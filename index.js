@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const adminRoute = require("./routes/adminRoutes");
-const brokerRoute = require("./routes/brokerRoutes");
+const adminRoute = require("./routes/admin");
+const brokerRoute = require("./routes/teams");
 const bodyParser = require("body-parser");
 const path = require("node:path");
 const { Server } = require("socket.io");
@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
 });
 
 //Mongoose Setup
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 5000;
 
 mongoose
   .connect(process.env.MONGO_URL, {
