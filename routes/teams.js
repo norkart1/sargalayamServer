@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const brokerController = require("../Controller/brokerCRUD");
+const teamController = require("../Controller/teamsCrud");
 const upload = require("../Middlewares/multer");
 
 router.post("/addBroker", upload.single("image"), async (req, res) => {
   let io = req.io;
 
   try {
-    // Call the brokerController to add the broker
-    const response = await brokerController.addBroker(req.body, req.file, io);
+    // Call the teamController to add the broker
+    const response = await teamController.addBroker(req.body, req.file, io);
 
     // Send a success response back to the client
     res
@@ -31,7 +31,7 @@ router.put("/updateBrokerBy/:id", upload.single("image"), async (req, res) => {
   let io = req.io;
 
   try {
-    const response = await brokerController.updateBrokerById(
+    const response = await teamController.updateBrokerById(
       id,
       brokerData,
       brokerImage,
@@ -59,7 +59,7 @@ router.delete("/deleteBrokerBy/:id", async (req, res) => {
 
   try {
     // Call the deleteBroker function from the controller to delete the broker
-    const deletedBroker = await brokerController.deleteBrokerById(id, io);
+    const deletedBroker = await teamController.deleteBrokerById(id, io);
 
     // If the broker was successfully deleted, send a success response
     res.status(200).json({ message: "Franchise deleted successfully" });
@@ -75,7 +75,7 @@ router.delete("/deleteBrokerBy/:id", async (req, res) => {
 
 router.get("/getAllBrokers", async (req, res) => {
   try {
-    const response = await brokerController.getAllBrokers();
+    const response = await teamController.getAllBrokers();
     console.log("all brokers", response);
     res.status(200).json(response);
   } catch (error) {
