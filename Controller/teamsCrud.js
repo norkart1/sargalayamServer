@@ -1,24 +1,24 @@
-const Brokers = require("../Models/brokers");
+const Teams = require("../Model/teams");
 const path = require("path");
 const fs= require('fs')
 
 // Function to add a new broker
-const addBroker = async (brokerData, brokerImg,io) => {
-  console.log(brokerData)
+const addBroker = async (teamData, teamImg,io) => {
+  console.log(teamData)
   try {
-    // Create a new instance of the Brokers model with the provided data
-    const newBroker = new Brokers({
-      name: brokerData.name,
-      ranking: brokerData.ranking,
-      link: brokerData.link,
-      score:brokerData.score,
-      location: brokerData.location,
-      image: brokerImg ? brokerImg.filename : null,
+    // Create a new instance of the Teams model with the provided data
+    const newBroker = new Teams({
+      name: teamData.name,
+      ranking: teamData.ranking,
+      link: teamData.link,
+      score:teamData.score,
+      location: teamData.location,
+      image: teamImg ? teamImg.filename : null,
     });
 
     // Save the new broker to the database
     const savedBroker = await newBroker.save();
-    io.emit('broker_add')
+    io.emit('team_add')
 
 
     return savedBroker;
@@ -27,20 +27,20 @@ const addBroker = async (brokerData, brokerImg,io) => {
   }
 };
 
-const getAllBrokers = async () => {
+const getAllTeams = async () => {
   try {
-    // Fetch all brokers from the database
-    const brokers = await Brokers.find();
-    return brokers;
+    // Fetch all Teams from the database
+    const Teams = await Teams.find();
+    return Teams;
   } catch (error) {
     throw error;
   }
 };
 
-const getBrokerById = async (id) => {
+const getTeamById = async (id) => {
   try {
     // Find broker by ID in the database
-    const broker = await Brokers.findById(id);
+    const broker = await Teams.findById(id);
     if (!broker) {
       throw new Error("Broker not found");
     }
@@ -50,10 +50,10 @@ const getBrokerById = async (id) => {
   }
 };
 
-const updateBrokerById = async (id, newData, newImage,io) => {
+const updateTeamById = async (id, newData, newImage,io) => {
   try {
     // Find broker by ID and update its data in the database
-    const currentData = await Brokers.findById(id);
+    const currentData = await Teams.findById(id);
 
     if (!currentData) {
       throw new Error("Broker not found");
@@ -69,7 +69,7 @@ const updateBrokerById = async (id, newData, newImage,io) => {
       if (currentData.image) {
         const imagePath = path.join(
           __dirname,
-          "../public/brokersImages",
+          "../public/TeamsImages",
           currentData.image
         );
 
@@ -88,10 +88,10 @@ const updateBrokerById = async (id, newData, newImage,io) => {
   }
 };
 
-const deleteBrokerById = async (id,io) => {
+const deleteTeamById = async (id,io) => {
   try {
     // Find broker by ID and delete it from the database
-    const deletedBroker = await Brokers.findByIdAndDelete(id);
+    const deletedBroker = await Teams.findByIdAndDelete(id);
     if (!deletedBroker) {
       throw new Error("Broker not found");
     }
@@ -103,7 +103,7 @@ const deleteBrokerById = async (id,io) => {
     if (imageUrl) {
       const imagePath = path.join(
         __dirname,
-        "../public/brokersImages",
+        "../public/TeamsImages",
         imageUrl
       );
       fs.unlinkSync(imagePath);
@@ -118,8 +118,8 @@ const deleteBrokerById = async (id,io) => {
 
 module.exports = {
   addBroker,
-  getAllBrokers,
-  deleteBrokerById,
-  updateBrokerById,
-  getBrokerById,
+  getAllTeams,
+  deleteTeamById,
+  updateTeamById,
+  getTeamById,
 };

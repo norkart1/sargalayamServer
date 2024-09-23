@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const AdminSession = require("../Models/SessionSchema/admin");
+const AdminSession = require("../Model/admin");
 
 module.exports = {
   login: async (req, res) => {
