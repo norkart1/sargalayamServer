@@ -1,11 +1,13 @@
 const multer = require("multer");
 const path = require('node:path')
+const fs = require('fs')
 
 // Storing the image with franchise ID as part of the filename
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
      
-    const pathx = path.join(__dirname, "public", "teamImages");
+    const pathx = path.join(__dirname, "../public", "teamImages");
+    console.log(pathx);
 
     if (!fs.existsSync(pathx)) {
       console.log("Directory does not exist, creating...");

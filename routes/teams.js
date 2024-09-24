@@ -30,6 +30,8 @@ router.put("/updateteamBy/:id", upload.single("image"), async (req, res) => {
   let teamImage = req.file;
   let io = req.io;
 
+   
+
   try {
     const response = await teamController.updateTeamById(
       id,
@@ -59,7 +61,7 @@ router.delete("/deleteteamBy/:id", async (req, res) => {
 
   try {
     // Call the deleteteam function from the controller to delete the team
-    const deletedteam = await teamController.deleteTeamById(id, io);
+   // const deletedteam = await teamController.deleteTeamById(id, io);
 
     // If the team was successfully deleted, send a success response
     res.status(200).json({ message: "Franchise deleted successfully" });
@@ -77,7 +79,7 @@ router.get("/getAllteams", async (req, res) => {
   
   try {
     const response = await teamController.getAllTeams()
-    console.log("all teams", response);
+    
     res.status(200).json(response);
   } catch (error) {
     console.error("Error fetching teams:", error);

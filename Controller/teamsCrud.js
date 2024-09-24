@@ -30,7 +30,7 @@ const addTeam = async (teamData, teamImg,io) => {
 
 const getAllTeams = async () => {
   try {
-    console.log('working')
+     
     // Fetch all Teams from the database
     const allTeams = await Teams.find();
 
@@ -72,7 +72,7 @@ const updateTeamById = async (id, newData, newImage,io) => {
       if (currentData.image) {
         const imagePath = path.join(
           __dirname,
-          "../public/TeamsImages",
+          "../public/teamImages",
           currentData.image
         );
 
@@ -106,7 +106,7 @@ const deleteTeamById = async (id,io) => {
     if (imageUrl) {
       const imagePath = path.join(
         __dirname,
-        "../public/TeamsImages",
+        "../public/teamImages",
         imageUrl
       );
       fs.unlinkSync(imagePath);
