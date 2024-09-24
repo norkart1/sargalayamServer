@@ -4,6 +4,8 @@ const TeamSchema = new mongoose.Schema({
   name: { type: String, required: true },
   ranking: { type: Number, required: true },
   score: {type: Number, required:true },
+  program: {type : String,required:true},
+  category: {type : String,required:true},
   image: { type: String }, // This will store the image URL or a reference to the image location
   createdAt: { type: Date, default: Date.now },
 });

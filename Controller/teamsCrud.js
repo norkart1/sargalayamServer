@@ -1,26 +1,23 @@
-
 const path = require("path");
-const fs= require('fs');
+const fs = require("fs");
 const Teams = require("../Model/teams");
 
 // Function to add a new team
-const addTeam = async (teamData, teamImg,io) => {
-  console.log(teamData)
+const addTeam = async (teamData, teamImg, io) => {
   try {
     // Create a new instance of the Teams model with the provided data
     const newteam = new Teams({
       name: teamData.name,
       ranking: teamData.ranking,
-      link: teamData.link,
-      score:teamData.score,
-      location: teamData.location,
+      score: teamData.score,
+      program: teamData.program,
+      type: teamData.type,
       image: teamImg ? teamImg.filename : null,
     });
 
     // Save the new team to the database
     const savedteam = await newteam.save();
-    io.emit('team_add')
-
+    io.emit("team_add");
 
     return savedteam;
   } catch (error) {
@@ -30,7 +27,6 @@ const addTeam = async (teamData, teamImg,io) => {
 
 const getAllTeams = async () => {
   try {
-     
     // Fetch all Teams from the database
     const allTeams = await Teams.find();
 
@@ -53,7 +49,20 @@ const getTeamById = async (id) => {
   }
 };
 
-const updateTeamById = async (id, newData, newImage,io) => {
+const getTeamByCategory = async (category) => {
+  try {
+    // Find team by ID in the database
+    const team = await Teams.findById(category);
+    if (!team) {
+      throw new Error("team not found");
+    }
+    return team;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateTeamById = async (id, newData, newImage, io) => {
   try {
     // Find team by ID and update its data in the database
     const currentData = await Teams.findById(id);
@@ -83,7 +92,7 @@ const updateTeamById = async (id, newData, newImage,io) => {
     }
 
     await currentData.save();
-    io.emit('team_update')
+    io.emit("team_update");
 
     return currentData;
   } catch (error) {
@@ -91,7 +100,7 @@ const updateTeamById = async (id, newData, newImage,io) => {
   }
 };
 
-const deleteTeamById = async (id,io) => {
+const deleteTeamById = async (id, io) => {
   try {
     // Find team by ID and delete it from the database
     const deletedteam = await Teams.findByIdAndDelete(id);
@@ -104,15 +113,11 @@ const deleteTeamById = async (id,io) => {
 
     // Delete the image file from the folder
     if (imageUrl) {
-      const imagePath = path.join(
-        __dirname,
-        "../public/teamImages",
-        imageUrl
-      );
+      const imagePath = path.join(__dirname, "../public/teamImages", imageUrl);
       fs.unlinkSync(imagePath);
     }
 
-    io.emit('team_delete')
+    io.emit("team_delete");
     return deletedteam;
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -125,4 +130,5 @@ module.exports = {
   deleteTeamById,
   updateTeamById,
   getTeamById,
+  getTeamByCategory,
 };
