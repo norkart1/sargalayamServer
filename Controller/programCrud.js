@@ -9,7 +9,7 @@ module.exports = {
     console.log("value", value);
     console.log("label", label);
 
-    const newProgram = new Program({ value, label, types: [] });
+    const newProgram = new Program({ value, label });
 
     try {
       await newProgram.save();
@@ -20,34 +20,6 @@ module.exports = {
     }
   },
 
-  addType: async (req, res) => {
-    const { programValue, value, label } = req.body;
-
-    console.log("rebodoy", req.body);
-
-    try {
-      const program = await Program.findOne({ value: programValue });
-
-      if (!program) {
-        return res.status(404).json({ error: "program not found" });
-      }
-
-      // Check if the type already exists
-      const typeExists = program.types.some((type) => type.value === value);
-      if (typeExists) {
-        return res.status(400).json({ error: "Type already exists" });
-      }
-
-      // Add the new type to the program's types array
-      program.types.push({ value: value, label: label });
-      await program.save();
-
-      res.status(200).json(program);
-    } catch (error) {
-      console.error("Error adding type:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  },
   getAllPrograms: async (req, res) => {
     console.log("calling");
     try {
@@ -90,6 +62,8 @@ module.exports = {
 
   updateProgramById: async (req, res) => {
     const { value, label } = req.body;
+
+    console.log(req.body);
 
     try {
       const foundProgram = await Program.findOne({ value: value });

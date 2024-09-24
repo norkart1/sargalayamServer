@@ -11,6 +11,8 @@ const addTeam = async (teamData, teamImg, io) => {
       ranking: teamData.ranking,
       score: teamData.score,
       program: teamData.program,
+      isSingle: teamData.isSingle,
+      isGroup: teamData.isGroup,
       type: teamData.type,
       image: teamImg ? teamImg.filename : null,
     });

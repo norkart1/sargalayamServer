@@ -98,7 +98,7 @@ router.delete("/deleteteamBy/:id", async (req, res) => {
 
   try {
     // Call the deleteteam function from the controller to delete the team
-    // const deletedteam = await teamController.deleteTeamById(id, io);
+    const deletedteam = await teamController.deleteTeamById(id, io);
 
     // If the team was successfully deleted, send a success response
     res.status(200).json({ message: "Franchise deleted successfully" });
@@ -142,7 +142,7 @@ router.get("/getTeamById/:id", async (req, res) => {
 
 router.get("/getAllPrograms", getAllPrograms);
 router.delete("/deleteProgramById/:id", deleteProgramById);
-router.delete("/updateProgram/:id", updateProgramById);
+router.put("/updateProgram/:id", updateProgramById);
 router.post("/createProgram", addProgram);
 
 router.get("/getTeamsByProgram/:id", async (req, res) => {

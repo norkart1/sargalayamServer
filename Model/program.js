@@ -1,15 +1,8 @@
 const mongoose = require("mongoose");
 
-const typeSchema = new mongoose.Schema({
-  value: String,
-  label: String,
-});
-
 const programSchema = new mongoose.Schema({
   value: { type: String, required: true, unique: true },
   label: { type: String, required: true },
-  image: { type: String },
-  types: [typeSchema],
 });
 
 // programSchema.pre("remove", async function (next) {

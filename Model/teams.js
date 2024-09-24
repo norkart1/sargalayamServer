@@ -1,15 +1,19 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const TeamSchema = new mongoose.Schema({
+const teamSchema = new mongoose.Schema({
   name: { type: String, required: true },
   ranking: { type: Number, required: true },
-  score: {type: Number, required:true },
-  program: {type : String,required:true},
-  category: {type : String,required:true},
-  image: { type: String }, // This will store the image URL or a reference to the image location
-  createdAt: { type: Date, default: Date.now },
+  score: { type: Number, required: true },
+  program: { type: String, required: true },
+  image: { type: String }, // URL or file path for the image
+
+  // For the checkbox data
+  isSingle: { type: Boolean, default: false },
+  isGroup: { type: Boolean, default: false },
+
+  createdAt: { type: Date, default: Date.now }
 });
 
-const Teams = mongoose.model("Team", TeamSchema);
+const Team = mongoose.model('Team', teamSchema);
 
-module.exports = Teams;
+module.exports = Team;
