@@ -6,9 +6,6 @@ module.exports = {
   addProgram: async (req, res) => {
     const { value, label } = req.body;
 
-    console.log("value", value);
-    console.log("label", label);
-
     const newProgram = new Program({ value, label });
 
     try {
@@ -21,7 +18,7 @@ module.exports = {
   },
 
   getAllPrograms: async (req, res) => {
-    console.log("calling");
+    
     try {
       const programs = await Program.find();
 
@@ -41,15 +38,15 @@ module.exports = {
       const imageUrl = program.image;
 
       // Delete the image file from the folder
-      if (imageUrl) {
-        const imagePath = path.join(
-          __dirname,
-          "../public/programImg",
-          imageUrl
-        );
+      // if (imageUrl) {
+      //   const imagePath = path.join(
+      //     __dirname,
+      //     "../public/programImg",
+      //     imageUrl
+      //   );
 
-        fs.unlinkSync(imagePath);
-      }
+      //   fs.unlinkSync(imagePath);
+      // }
 
       await program.deleteOne();
 
