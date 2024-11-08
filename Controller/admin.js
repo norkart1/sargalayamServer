@@ -5,7 +5,7 @@ module.exports = {
   login: async (req, res) => {
     const { email, password } = req.body;
     try {
-      if (email === "admin@gmail.com" && password === "password1") {
+      if (email === "samastha@gmail.com" && password === "Password1") {
         // Check if the user is already logged in
         const existingSession = await AdminSession.findOne({ emailID: email });
 
