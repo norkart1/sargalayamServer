@@ -12,6 +12,10 @@ const {
   addProgram,
   deleteProgramById,
   updateProgramById,
+  addTeamToProgram,
+  getTeamProgramDetail,
+  editTeamInProgram,
+  deleteTeamFromProgram,
 } = require("../Controller/programCrud");
 
 // Define storage for the images
@@ -144,6 +148,12 @@ router.get("/getAllPrograms", getAllPrograms);
 router.delete("/deleteProgramById/:id", deleteProgramById);
 router.put("/updateProgram/:id", updateProgramById);
 router.post("/createProgram", addProgram);
+
+
+router.post("/addTeamToProgram", addTeamToProgram);
+router.get("/getTeamProgramDetails", getTeamProgramDetail);
+router.put("/editTeamInProgram", editTeamInProgram);
+router.delete("/deleteTeamFromProgram", deleteTeamFromProgram);
 
 router.get("/getTeamsByProgram/:id", async (req, res) => {
   const category = req.params.id;
