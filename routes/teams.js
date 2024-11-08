@@ -49,24 +49,22 @@ const categoryUpload = multer({
 });
 
 router.post("/addteam", async (req, res) => {
-  let io = req.io;
-
   try {
-    // Call the teamController to add the team
-    const response = await teamController.addTeam(req.body, req.file, io);
+    const { name } = req.body; // Destructure name
 
-    // Send a success response back to the client
-    res
-      .status(200)
-      .json({ message: "team added successfully", team: response });
+    if (!name || typeof name !== "string") {
+      return res.status(400).json({ message: "Invalid or missing 'name' field" });
+    }
+
+    const response = await teamController.addTeam(req.body, req.file, req.io);
+
+    res.status(200).json({ message: "Team added successfully", team: response });
   } catch (error) {
-    // Handle any errors that occur during team addition
     console.error("Error adding team:", error);
-    res
-      .status(500)
-      .json({ message: "Failed to add team", error: error.message });
+    res.status(500).json({ message: "Failed to add team", error: error.message });
   }
 });
+
 
 router.put("/updateteamBy/:id", async (req, res) => {
   let id = req.params.id;

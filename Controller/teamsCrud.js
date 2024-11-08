@@ -4,15 +4,17 @@ const Teams = require("../Model/teams");
 
 
 
-const addTeam = async (name, image) => {
-  
+const addTeam = async (data, image) => {
   try {
-    // Create a new team
+    const { name } = data; // Extract name from data object
+
+    if (typeof name !== "string" || !name.trim()) {
+      throw new Error("Invalid name: must be a non-empty string");
+    }
+
     const newTeam = new Teams({
       name,
-      //image,
       programs: [], // Empty program array initially
-      //students:[],
     });
 
     await newTeam.save();
@@ -21,6 +23,7 @@ const addTeam = async (name, image) => {
     throw error;
   }
 };
+
  
 
 const getAllTeams = async () => {
