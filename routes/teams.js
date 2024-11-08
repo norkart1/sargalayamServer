@@ -48,7 +48,7 @@ const categoryUpload = multer({
   limits: { fileSize: 1024 * 1024 * 2 }, // Limit file size to 2MB
 });
 
-router.post("/addteam", upload.single("image"), async (req, res) => {
+router.post("/addteam", async (req, res) => {
   let io = req.io;
 
   try {
@@ -68,17 +68,16 @@ router.post("/addteam", upload.single("image"), async (req, res) => {
   }
 });
 
-router.put("/updateteamBy/:id", upload.single("image"), async (req, res) => {
+router.put("/updateteamBy/:id", async (req, res) => {
   let id = req.params.id;
   let teamData = req.body;
-  let teamImage = req.file;
+  //let teamImage = req.file;
   let io = req.io;
 
   try {
     const response = await teamController.updateTeamById(
       id,
       teamData,
-      teamImage,
       io
     );
 

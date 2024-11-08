@@ -10,7 +10,7 @@ const addTeam = async (name, image) => {
     // Create a new team
     const newTeam = new Teams({
       name,
-      image,
+      //image,
       programs: [], // Empty program array initially
       //students:[],
     });
@@ -64,7 +64,7 @@ const getTeamByCategory = async (category) => {
   }
 };
 
-const updateTeamById = async (id, newData, newImage, io) => {
+const updateTeamById = async (id, newData, io) => {
   try {
     // Find team by ID and update its data in the database
     const currentData = await Teams.findById(id);
@@ -76,20 +76,20 @@ const updateTeamById = async (id, newData, newImage, io) => {
     currentData.name = newData.name;
    
 
-    if (newImage) {
-      // Delete the old image file from the folder
-      if (currentData.image) {
-        const imagePath = path.join(
-          __dirname,
-          "../public/teamImages",
-          currentData.image
-        );
+    // if (newImage) {
+    //   // Delete the old image file from the folder
+    //   if (currentData.image) {
+    //     const imagePath = path.join(
+    //       __dirname,
+    //       "../public/teamImages",
+    //       currentData.image
+    //     );
 
-        fs.unlinkSync(imagePath);
-      }
+    //     fs.unlinkSync(imagePath);
+    //   }
 
-      currentData.image = newImage.filename;
-    }
+    //   currentData.image = newImage.filename;
+    // }
 
     await currentData.save();
     io.emit("team_update");
