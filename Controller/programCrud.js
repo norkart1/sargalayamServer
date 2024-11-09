@@ -1,5 +1,5 @@
 const Program = require("../Model/program");
-const Team = require("../Model/teams");
+const Teams = require("../Model/teams");
 const path = require("path");
 const fs = require("fs");
 
