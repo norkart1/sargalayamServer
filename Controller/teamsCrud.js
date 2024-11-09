@@ -68,6 +68,7 @@ const getTeamByCategory = async (category) => {
 };
 
 const updateTeamById = async (id, newData, io) => {
+  console.log('newData',newData);
   try {
     // Find team by ID and update its data in the database
     const currentData = await Teams.findById(id);
