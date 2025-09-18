@@ -6,7 +6,8 @@ This is a Node.js backend application for managing college rankings with team an
 ## Application URLs
 - **Frontend Client**: https://sargalayam-client.onrender.com/ (hosted on Render)
 - **Admin Dashboard**: https://admin-29iy.onrender.com (hosted on Render)
-- **Backend API**: https://6d1f1e89-cf11-4e66-af35-b43c64ba7417-00-kt1lw9j04i8h.sisko.replit.dev/ (hosted on Replit)
+- **Backend API**: https://sargalayamserver-mt7j.onrender.com (hosted on Render)
+- **Development API**: https://6d1f1e89-cf11-4e66-af35-b43c64ba7417-00-kt1lw9j04i8h.sisko.replit.dev/ (hosted on Replit for development)
 
 ## Project Status
 - **Setup Date**: September 18, 2025
