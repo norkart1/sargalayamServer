@@ -3,6 +3,11 @@
 ## Overview
 This is a Node.js backend application for managing college rankings with team and program management functionality. The application provides REST APIs for teams, programs, and admin operations with MongoDB database integration and Socket.IO for real-time features.
 
+## Application URLs
+- **Frontend Client**: https://sargalayam-client.onrender.com/ (hosted on Render)
+- **Admin Dashboard**: https://admin-29iy.onrender.com (hosted on Render)
+- **Backend API**: https://6d1f1e89-cf11-4e66-af35-b43c64ba7417-00-kt1lw9j04i8h.sisko.replit.dev/ (hosted on Replit)
+
 ## Project Status
 - **Setup Date**: September 18, 2025
 - **Current State**: Successfully configured for Replit environment
